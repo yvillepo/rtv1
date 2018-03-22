@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 11:32:33 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/21 19:01:19 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/22 21:10:21 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void		calc_dir(t_mlx *mlx, t_vect *dir, double x, double y)
 	t_vect	*j;
 	t_vect	*k;
 
-	uv.x = -(mlx->h / 2) + mlx->pitch * x;
-	uv.y = -(mlx->h / 2) + mlx->pitch * y;
+	uv.x = (mlx->h / 2) - mlx->pitch * x;
+	uv.y = (mlx->h / 2) - mlx->pitch * y;
 	k = mlx->camera_dir;
 	v_unit(k);
 	j = new_vect(0, 1, 0);
@@ -73,7 +73,7 @@ static t_color	calc(t_mlx *mlx, t_vect *dir, t_list *object)
 		}
 		object = object->next;
 	}
-	if (is_shadow(mlx, &line, min))
+	if (is_shadow(mlx, &line, min) && mlx->ombre)
 		return (((t_color)(unsigned int)(0)));
 	if (obj)
 		return (mult_color(obj->color, 0.10 + calc_light(mlx, &line, obj, min)));

@@ -6,7 +6,7 @@
 /*   By: yvillepo <yvillepo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 00:42:44 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/20 11:31:53 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/22 20:41:56 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_mlx			*init(int ac, char **av)
 		exit_error("init");
 	m->object = NULL;
 	m->image.im = new_image(m, &(m->image.pim));
+	m->ombre = 1;
 	parse(m, av[1]);
 	calc_pitch(m);
 	return (m);

@@ -5,16 +5,4 @@ cone
 0 1 0
 0 0 3
 35
-0000FF
-plane
-0 1 0
-0 3 0
-00FF00
-plane
-0 1 0
-0 -3 0
-FF0000
-plane
-0 0 1
-0 0 10
-FFFF00
+FFFFFF

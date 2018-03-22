@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 13:16:18 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/20 13:17:11 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/22 21:06:21 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ t_color	mult_color(t_color color, double mult)
 		mult = 0;
 	if (mult > 1)
 		mult = 1;
-	if (mult == 0)
-		printf ("noir\n");
 	color.rgb[0] *= mult;
 	color.rgb[1] *= mult;
 	color.rgb[2] *= mult;

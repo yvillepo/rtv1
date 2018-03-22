@@ -6,7 +6,7 @@
 /*   By: yvillepo <yvillepo@student.44.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 01:56:28 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/21 20:03:01 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/22 20:39:48 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef struct		s_mlx
 	double			fov;
 	t_point			res;
 	double			pitch;
+	int				ombre;
 	t_list			*object;
 	t_image			image;
 }					t_mlx;
@@ -192,6 +193,7 @@ void				read_rot(t_mlx *mlx, char *line, int fd, int i);
 double				v_scale(t_vect *u, t_vect *v);
 t_color				mult_color(t_color color, double mult);
 double				calc_light(t_mlx *mlx, t_line *cam, t_object *obj, double t);
+void				clear_im(t_mlx *mlx, unsigned int *im);
 
 void				print_object(t_mlx *mlx);
 

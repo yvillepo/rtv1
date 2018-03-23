@@ -12,18 +12,39 @@
 
 #include "rtv1.h"
 
-static int		shadow(t_list *o, t_line *light)
+static double		shadow(t_list *o, t_line *light)
 {
 	double		t;
+	int			cmp;
+	double		res;
 
+	cmp = 0;
+	res = 0.30;
 	while (o)
 	{
 		t = intersec_unit(o->content, light);
 		if (t < 0.9999999 && t > 0)
-			return (1);
+			cmp++;
 		o = o->next;
 	}
-	return (0);
+	if (cmp == 0)
+		return (10);
+	return (res / cmp);
+}
+
+double			is_shadow(t_mlx *mlx, t_line *cam, double d)
+{
+	t_line	light;
+	t_vect	*tmp;
+	double	res;
+
+	tmp = calc_point(cam, d);
+	light.origin = mlx->light;
+	light.dir = v_sub(tmp, light.origin);
+	free(tmp);
+	res = shadow(mlx->object, &light);
+	free(light.dir);
+	return (res);
 }
 
 static t_vect	*calc_norm(double t, t_line *cam, t_object *obj, t_vect *pos)
@@ -63,26 +84,16 @@ double			calc_light(t_mlx *mlx, t_line *cam, t_object *obj, double t)
 	t_vect	*norm;
 	t_vect	*dir_light;
 	t_vect	*pos;
+	double	percent;
 
 	pos = calc_point(cam, t);
 	norm = calc_norm(t, cam, obj, pos);
 	v_unit(norm);
 	dir_light = v_sub(pos, mlx->light);
 	v_unit(dir_light);
-	return (ft_absd(v_mult(dir_light, norm)));
-}
-
-int				is_shadow(t_mlx *mlx, t_line *cam, double d)
-{
-	t_line	light;
-	t_vect	*tmp;
-	double	res;
-
-	tmp = calc_point(cam, d);
-	light.origin = mlx->light;
-	light.dir = v_sub(tmp, light.origin);
-	free(tmp);
-	res = shadow(mlx->object, &light);
-	free(light.dir);
-	return (res);
+	percent = is_shadow(mlx, cam, t);
+	if (percent < 10 && mlx->ombre)
+		return (percent * ft_absd(v_mult(dir_light, norm)));
+	else
+		return (ft_absd(v_mult(dir_light, norm)));
 }

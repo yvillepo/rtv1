@@ -73,8 +73,6 @@ static t_color	calc(t_mlx *mlx, t_vect *dir, t_list *object)
 		}
 		object = object->next;
 	}
-	if (is_shadow(mlx, &line, min) && mlx->ombre)
-		return (((t_color)(unsigned int)(0)));
 	if (obj)
 		return (mult_color(obj->color, 0.10 + calc_light(mlx, &line, obj, min)));
 	return (((t_color)(unsigned int)0));

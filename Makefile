@@ -58,7 +58,7 @@ OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ) $(FT_LIB) $(MLX_LIB)
-	$(CC) $(FRAMEWORK) $(LNK) $(OBJ) -o $@
+	@$(CC) $(FRAMEWORK) $(LNK) $(OBJ) -o $@
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true

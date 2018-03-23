@@ -185,7 +185,7 @@ double				deg_to_rad(double a);
 t_vect				*v_cross(t_vect *u1, t_vect *u2);
 void				read_camera(t_mlx *mlx, int fd);
 double				intersec_unit(t_object *obj, t_line *line);
-int					is_shadow(t_mlx *mlx, t_line *cam, double d);
+double				is_shadow(t_mlx *mlx, t_line *cam, double d);
 void				read_light(t_mlx *mlx, int fd);
 void				rotate_xyz(t_vect *p, double a, int axe);
 void				rot_obj_x(t_object *obj, double angle, int axe);

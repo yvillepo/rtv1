@@ -39,7 +39,7 @@ double		inter_cone(t_cone *cone, t_line *l)
 	double	tan2;
 
 	diff = v_sub(l->origin, cone->pos);
-	tan2 = pow(tan(cone->a / 2), 2);
+	tan2 = pow(tan(cone->a), 2);
 	d2.x = v_mult(l->dir, l->dir) - (1 + tan2) *
 		pow(v_mult(l->dir, cone->dir), 2);
 	d2.y = 2 * (v_mult(l->dir, diff) - (1 + tan2) *

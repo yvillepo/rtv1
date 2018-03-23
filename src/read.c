@@ -79,7 +79,10 @@ void			parse(t_mlx *mlx, char *file)
 	while (get_next_line(fd, &line))
 	{
 		if (*line == 'r' || *line == 'R')
+		{
 			read_rot(mlx, line, fd, i);
+			continue;
+		}
 		else
 			read_object(mlx, line, fd);
 		if (line)

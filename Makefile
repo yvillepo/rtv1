@@ -6,7 +6,7 @@
 #    By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/20 17:00:03 by yvillepo          #+#    #+#              #
-#    Updated: 2018/03/23 03:30:38 by yvillepo         ###   ########.fr        #
+#    Updated: 2018/03/23 07:20:21 by yvillepo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRC_NAME = main.c \
 		   cyl.c \
 		   cone.c \
 		   vect.c \
-		   supr.c \
 		   camera.c \
 		   light.c \
 		   rotate_obj.c \
@@ -59,8 +58,9 @@ OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(FT_LIB) $(MLX_LIB)
-	@$(CC) $(FRAMEWORK) $(LNK) $(OBJ) -o $@
+$(NAME): $(OBJ) $(FT_LIB)
+	@make -C $(MLX)
+	$(CC) $(FRAMEWORK) $(LNK) $(OBJ) -o $@
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true

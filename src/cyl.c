@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 11:31:11 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 05:56:51 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 08:23:22 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void			read_cyl(t_cyl *cyl, int fd)
 	char	*line;
 
 	cyl->dir = read_vect(fd);
+	if (is_nul(cyl->dir))
+		exit_error("vecteur directeur null");
 	cyl->pos = read_vect(fd);
 	if (!get_next_line(fd, &line))
 		exit_error("format input");

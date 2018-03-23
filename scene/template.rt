@@ -18,15 +18,14 @@ dir       : 0 1 0
 pos       : 0 -1 0
 color obj : 0000ff
 
-object    : cone 
+object    : cone
 dir       : 0 1 0
 pos       : 0 -1 0
 angle     : 30
-color obj : 00ffff
 
 rotation obj 2 (cylindre) de 30 degre axe z :
-R 2 z 30
+R 2 x 30
 
 translation obj 4 (cone) de (3.5 0 0) :
-T 4
+T 3
 3.5 0 0

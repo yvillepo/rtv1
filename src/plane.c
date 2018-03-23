@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 10:40:59 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 05:44:05 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 08:23:12 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void		read_object_plane(t_object *object, int fd)
 void		read_plane(t_plane *plane, int fd)
 {
 	plane->normal = read_vect(fd);
+	if (is_nul(plane->normal))
+		exit_error("vecteur directeur null");
 	plane->pos = read_vect(fd);
 	plane->d = -(plane->normal->x * plane->pos->x + plane->normal->y *
 			plane->pos->y + plane->normal->z * plane->pos->z);

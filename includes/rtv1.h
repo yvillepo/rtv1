@@ -6,7 +6,7 @@
 /*   By: yvillepo <yvillepo@student.44.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 01:56:28 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 07:42:56 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 08:21:26 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,5 +196,6 @@ void				read_color(t_color *color, int fd);
 void				jump_coment(char **line);
 void				jump_coment2(char **line);
 void				calc_ray(t_mlx *mlx, t_vect *dir, double x, double y);
+int					is_nul(t_vect *v);
 
 #endif

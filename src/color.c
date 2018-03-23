@@ -1,45 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/20 13:16:18 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 04:04:02 by yvillepo         ###   ########.fr       */
+/*   Created: 2018/03/23 03:29:15 by yvillepo          #+#    #+#             */
+/*   Updated: 2018/03/23 04:21:01 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_vect	*new_vect(double x, double y, double z)
+void			read_color(t_color *color, int fd)
 {
-	t_vect	*new;
+	char	*line;
 
-	new = ft_memalloc(sizeof(*new));
-	new->x = x;
-	new->y = y;
-	new->z = z;
-	return (new);
+	if (get_next_line(fd, &line) == 0)
+		exit_error("fichier emtree");
+	jump_coment(&line);
+	color->color = (unsigned int)ft_atoi_base(line, 16);
+	free(line);
 }
 
-void	jump_coment2(char **line)
+t_color	mult_color(t_color color, double mult)
 {
-	char	*l;
-
-	l = *line;
-	while (*l)
-	{
-		if (*l == ':')
-		{
-			*line = l + 1;
-			return ;
-		}
-		l++;
-	}
-}
-
-double	calc_height_screen(t_mlx *mlx)
-{
-	return (tan(mlx->fov / 2) * 2);
+	if (mult < 0)
+		mult = 0;
+	if (mult > 1)
+		mult = 1;
+	color.rgb[0] *= mult;
+	color.rgb[1] *= mult;
+	color.rgb[2] *= mult;
+	return (color);
 }

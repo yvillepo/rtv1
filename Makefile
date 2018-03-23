@@ -6,7 +6,7 @@
 #    By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/20 17:00:03 by yvillepo          #+#    #+#              #
-#    Updated: 2018/03/20 19:30:11 by yvillepo         ###   ########.fr        #
+#    Updated: 2018/03/23 03:30:38 by yvillepo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,9 @@ SRC_NAME = main.c \
 		   camera.c \
 		   light.c \
 		   rotate_obj.c \
-		   rotate.c
+		   rotate.c \
+		   translation.c \
+		   color.c
 
 OBJ_PATH = ./obj/
 CPPFLAGS = -Iincludes

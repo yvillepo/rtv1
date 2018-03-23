@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 11:28:48 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/20 11:30:58 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 04:19:37 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		read_cone(t_cone *cone, int fd)
 	cone->pos = read_vect(fd);
 	if (!get_next_line(fd, &line))
 		exit_error("format input");
+	jump_coment(&line);
 	cone->a = deg_to_rad(ft_atof(line));
 	free(line);
 }

@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 11:31:11 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/22 20:58:16 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 05:56:51 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void			read_cyl(t_cyl *cyl, int fd)
 	cyl->pos = read_vect(fd);
 	if (!get_next_line(fd, &line))
 		exit_error("format input");
+	jump_coment(&line);
 	cyl->r = ft_atof(line);
 	free(line);
 }
@@ -75,5 +76,6 @@ double			inter_cyl(t_cyl *cyl, t_line *l)
 	(cyl->dir->x * cyl->dir->y * d->x * d->y +
 	cyl->dir->x * cyl->dir->z * d->x * d->z +
 	cyl->dir->y * cyl->dir->z * d->y * d->z) - cyl->r * cyl->r;
+	free(d);
 	return (solv_2nd(a, b, c));
 }

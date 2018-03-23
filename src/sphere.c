@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 13:12:49 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/22 20:32:37 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 03:51:05 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void		read_sphere(t_sphere *sphere, int fd)
 	sphere->centre = read_vect(fd);
 	if (get_next_line(fd, &line) == 0)
 		exit_error("fichier emtree");
+	jump_coment(&line);
 	sphere->rayon = ft_atof(line);
 	free(line);
 }

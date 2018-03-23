@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:56:24 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/21 19:52:28 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 03:58:58 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,7 @@ int					ft_atoi_base(const char *str, int base);
 int					get_next_line(int fd, char **line);
 double				ft_atof(const char *str);
 t_list				*ft_lst_nelem(t_list *l, int nb);
+int					len_tabstr(char **tabstr);
+void				free_tabstr(char ***tabstr);
 
 #endif

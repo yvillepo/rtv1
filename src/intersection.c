@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 11:32:33 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/22 21:10:21 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 05:57:53 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ static t_color	calc(t_mlx *mlx, t_vect *dir, t_list *object)
 		object = object->next;
 	}
 	if (obj)
-		return (mult_color(obj->color, 0.10 + calc_light(mlx, &line, obj, min)));
+		return (mult_color(obj->color, 0.10 +
+					calc_light(mlx, &line, obj, min)));
 	return (((t_color)(unsigned int)0));
 }
 

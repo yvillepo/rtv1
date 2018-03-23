@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 10:40:59 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/20 11:58:02 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 05:44:05 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,11 @@ void		read_object_plane(t_object *object, int fd)
 
 void		read_plane(t_plane *plane, int fd)
 {
-	t_vect	*va;
-
 	plane->normal = read_vect(fd);
-	va = read_vect(fd);
-	plane->d = -(plane->normal->x * va->x + plane->normal->y * va->y +
-			plane->normal->z * va->z);
-	free(va);
+	plane->pos = read_vect(fd);
+	plane->d = -(plane->normal->x * plane->pos->x + plane->normal->y *
+			plane->pos->y + plane->normal->z * plane->pos->z);
+	plane->pos = plane->pos;
 }
 
 double		inter_plane(t_plane *plane, t_line *line)

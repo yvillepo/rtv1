@@ -1,45 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   ft_tabstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/20 13:16:18 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 04:04:02 by yvillepo         ###   ########.fr       */
+/*   Created: 2018/03/23 03:56:24 by yvillepo          #+#    #+#             */
+/*   Updated: 2018/03/23 03:59:04 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "libft.h"
 
-t_vect	*new_vect(double x, double y, double z)
+static void	free_tab(char **tabstr)
 {
-	t_vect	*new;
-
-	new = ft_memalloc(sizeof(*new));
-	new->x = x;
-	new->y = y;
-	new->z = z;
-	return (new);
-}
-
-void	jump_coment2(char **line)
-{
-	char	*l;
-
-	l = *line;
-	while (*l)
+	if (!tabstr)
+		return ;
+	while (*tabstr)
 	{
-		if (*l == ':')
-		{
-			*line = l + 1;
-			return ;
-		}
-		l++;
+		if (*tabstr)
+			free(*tabstr);
+		tabstr++;
 	}
+	*tabstr = NULL;
 }
 
-double	calc_height_screen(t_mlx *mlx)
+int		len_tabstr(char **tabstr)
 {
-	return (tan(mlx->fov / 2) * 2);
+	int	i;
+
+	i = 0;
+	while (*tabstr)
+	{
+		tabstr++;
+		i++;
+	}
+	return (i);
 }
+
+void	free_tabstr(char ***tabstr)
+{
+	free_tab(*tabstr);
+	if (*tabstr)
+		free(*tabstr);
+}
+

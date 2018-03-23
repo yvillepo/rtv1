@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 11:28:48 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 04:19:37 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 06:45:16 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,4 @@ double		inter_cone(t_cone *cone, t_line *l)
 	d2.z = v_mult(diff, diff) - (1 + tan2) * pow(v_mult(diff, cone->dir), 2);
 	free(diff);
 	return (solv_2nd(d2.x, d2.y, d2.z));
-}
-
-void		print_cone(t_cone *cone)
-{
-	printf("cone :\ndir : %f %f %f\npositon : %f %f %f\nR = %f\n",
-			cone->dir->x, cone->dir->y,
-			cone->dir->z, cone->pos->x, cone->pos->y, cone->pos->z, cone->a);
 }

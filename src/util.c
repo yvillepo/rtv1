@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 13:16:18 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 04:04:02 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 07:32:15 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,6 @@ t_vect	*new_vect(double x, double y, double z)
 	new->y = y;
 	new->z = z;
 	return (new);
-}
-
-void	jump_coment2(char **line)
-{
-	char	*l;
-
-	l = *line;
-	while (*l)
-	{
-		if (*l == ':')
-		{
-			*line = l + 1;
-			return ;
-		}
-		l++;
-	}
 }
 
 double	calc_height_screen(t_mlx *mlx)

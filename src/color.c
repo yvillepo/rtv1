@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 03:29:15 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 04:21:01 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 07:25:27 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void			read_color(t_color *color, int fd)
 	free(line);
 }
 
-t_color	mult_color(t_color color, double mult)
+t_color			mult_color(t_color color, double mult)
 {
 	if (mult < 0)
 		mult = 0;

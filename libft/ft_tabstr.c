@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 03:56:24 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 03:59:04 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 07:44:44 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	free_tab(char **tabstr)
 	*tabstr = NULL;
 }
 
-int		len_tabstr(char **tabstr)
+int			len_tabstr(char **tabstr)
 {
 	int	i;
 
@@ -38,10 +38,9 @@ int		len_tabstr(char **tabstr)
 	return (i);
 }
 
-void	free_tabstr(char ***tabstr)
+void		free_tabstr(char ***tabstr)
 {
 	free_tab(*tabstr);
 	if (*tabstr)
 		free(*tabstr);
 }
-

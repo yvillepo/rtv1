@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 14:56:24 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 03:58:58 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 07:45:23 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 # include <unistd.h>
 # define BUFF_SIZE 100000
 
-typedef struct	s_fd
+typedef struct		s_fd
 {
-	int			fd;
-	char		*str;
-	struct s_fd	*next;
-}				t_fd;
+	int				fd;
+	char			*str;
+	struct s_fd		*next;
+}					t_fd;
 
 typedef struct		s_list
 {

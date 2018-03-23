@@ -6,14 +6,14 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 11:59:52 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 05:28:22 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 07:32:03 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include <fcntl.h>
 
-void	jump_coment(char **line)
+void			jump_coment(char **line)
 {
 	char	*l;
 	char	*tmp;
@@ -27,7 +27,7 @@ void	jump_coment(char **line)
 			while (*l && *l == ' ')
 				l++;
 			tmp = ft_strdup(l);
-			free (*line);
+			free(*line);
 			*line = tmp;
 			return ;
 		}
@@ -81,17 +81,17 @@ static void		read_object(t_mlx *mlx, char *obj, int fd)
 	free(object);
 }
 
-void			parse_block(t_mlx *mlx, char *line , int fd, int *i)
+void			parse_block(t_mlx *mlx, char *line, int fd, int *i)
 {
 	if (*line == 'r' || *line == 'R')
 	{
-		read_rot(mlx, line, fd, *i);
-		return;
+		read_rot(mlx, line, *i);
+		return ;
 	}
 	if (*line == 't' || *line == 'T')
 	{
 		read_translation(mlx, line, fd, *i);
-		return;
+		return ;
 	}
 	read_object(mlx, line, fd);
 	line = 0;
@@ -113,7 +113,7 @@ void			parse(t_mlx *mlx, char *file)
 		jump_coment(&line);
 		if (!(*line))
 		{
-			free (line);
+			free(line);
 			continue ;
 		}
 		parse_block(mlx, line, fd, &i);
@@ -121,5 +121,4 @@ void			parse(t_mlx *mlx, char *file)
 			free(line);
 		line = 0;
 	}
-	print_object(mlx);
 }

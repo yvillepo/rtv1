@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 02:35:09 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 03:27:22 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 07:31:29 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ static void		trans_obj(t_object *obj, char **vect)
 
 void			read_translation(t_mlx *mlx, char *line, int fd, int i)
 {
-	char 	**data;
-	char	*l;
-	t_list	*elem;
+	char		**data;
+	char		*l;
+	t_list		*elem;
 
 	data = ft_strsplit(line, ' ');
 	if (len_tabstr(data) != 2)

@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 19:10:56 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/21 20:12:59 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 07:31:04 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	rot_obj(t_object *obj, double angle, int axe)
 		rotate_xyz(((t_cone*)obj->form)->dir, angle, axe);
 }
 
-void	read_rot(t_mlx *mlx, char *line, int fd, int i)
+void	read_rot(t_mlx *mlx, char *line, int i)
 {
-	char 	**data;
-	t_list	*elem;
+	char		**data;
+	t_list		*elem;
 
 	data = ft_strsplit(line, ' ');
 	if (len_tabstr(data) < 4)

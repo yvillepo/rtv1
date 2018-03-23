@@ -6,7 +6,7 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 17:08:32 by yvillepo          #+#    #+#             */
-/*   Updated: 2017/11/14 17:42:14 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 07:44:14 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static unsigned int	calc_digit(const char *c)
 	return (17);
 }
 
-static int	calcul(const char *str, int base)
+static int			calcul(const char *str, int base)
 {
 	unsigned int	result;
 	unsigned int	digit;
@@ -40,7 +40,7 @@ static int	calcul(const char *str, int base)
 	return ((int)result);
 }
 
-int			ft_atoi_base(const char *str, int base)
+int					ft_atoi_base(const char *str, int base)
 {
 	unsigned int	result;
 	int				sign;

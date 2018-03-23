@@ -6,13 +6,13 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 11:38:52 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 06:32:59 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 07:29:41 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static double		shadow(t_list *o, t_line *light)
+static double	shadow(t_list *o, t_line *light)
 {
 	double		t;
 	int			cmp;
@@ -58,7 +58,7 @@ static t_vect	*calc_cc(t_object *obj, t_vect *pos, t_line *cam, double t)
 	tmp = v_sub(pos, ((t_cyl*)obj->form)->pos);
 	tmp3 = v_sub(cam->origin, ((t_cyl*)obj->form)->pos);
 	tmp2 = unit_scale(v_mult(cam->dir, ((t_cyl*)obj->form)->dir) * t +
-			+ v_mult(((t_cyl*)obj->form)->dir, tmp3),
+			v_mult(((t_cyl*)obj->form)->dir, tmp3),
 			((t_cyl*)obj->form)->dir);
 	free(tmp3);
 	if (obj->type == CONE)
@@ -93,11 +93,11 @@ static t_vect	*calc_norm(double t, t_line *cam, t_object *obj, t_vect *pos)
 
 double			calc_light(t_mlx *mlx, t_line *cam, t_object *obj, double t)
 {
-	t_vect	*norm;
-	t_vect	*dir_light;
-	t_vect	*pos;
-	double	percent;
-	double res;
+	t_vect		*norm;
+	t_vect		*dir_light;
+	t_vect		*pos;
+	double		percent;
+	double		res;
 
 	norm = 0;
 	pos = calc_point(cam, t);

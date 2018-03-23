@@ -6,35 +6,11 @@
 /*   By: yvillepo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 11:32:33 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 05:57:53 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 07:37:33 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-static void		calc_dir(t_mlx *mlx, t_vect *dir, double x, double y)
-{
-	t_vect	uv;
-	t_vect	*i;
-	t_vect	*j;
-	t_vect	*k;
-
-	uv.x = (mlx->h / 2) - mlx->pitch * x;
-	uv.y = (mlx->h / 2) - mlx->pitch * y;
-	k = mlx->camera_dir;
-	v_unit(k);
-	j = new_vect(0, 1, 0);
-	i = v_cross(k, j);
-	v_unit(i);
-	free(j);
-	j = v_cross(i, k);
-	dir->x = uv.x * i->x + uv.y * j->x + k->x;
-	dir->y = uv.x * i->y + uv.y * j->y + k->y;
-	dir->z = uv.x * i->z + uv.y * j->z + k->z;
-	free(i);
-	free(j);
-	v_unit(dir);
-}
 
 double			intersec_unit(t_object *obj, t_line *line)
 {
@@ -74,9 +50,11 @@ static t_color	calc(t_mlx *mlx, t_vect *dir, t_list *object)
 		object = object->next;
 	}
 	if (obj)
-		return (mult_color(obj->color, 0.10 +
-					calc_light(mlx, &line, obj, min)));
-	return (((t_color)(unsigned int)0));
+	{
+		return (mult_color(obj->color, 0.10
+					+ calc_light(mlx, &line, obj, min)));
+	}
+	return ((t_color)(unsigned int)0);
 }
 
 t_color			intersec(t_mlx *mlx, int i, int j, t_list *object)
@@ -85,6 +63,6 @@ t_color			intersec(t_mlx *mlx, int i, int j, t_list *object)
 	double		min;
 
 	min = 0;
-	calc_dir(mlx, &dir, i, j);
+	calc_ray(mlx, &dir, i, j);
 	return (calc(mlx, &dir, object));
 }

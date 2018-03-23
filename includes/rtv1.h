@@ -6,14 +6,12 @@
 /*   By: yvillepo <yvillepo@student.44.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 01:56:28 by yvillepo          #+#    #+#             */
-/*   Updated: 2018/03/23 04:04:15 by yvillepo         ###   ########.fr       */
+/*   Updated: 2018/03/23 07:42:56 by yvillepo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
-
-#include "stdio.h"
 
 # include "mlx.h"
 # include "libft.h"
@@ -148,8 +146,6 @@ void				parse(t_mlx *mlx, char *file);
 void				free_tabstr(char ***tab);
 int					len_tabstr(char **tabstr);
 void				trace_ray(t_mlx *mlx, t_list *object);
-int					is_between(t_vect *A, t_vect *B, t_vect *M);
-double				is_coplanar(t_vect *A, t_vect *B);
 void				print_vect(char *s, t_vect *v);
 t_vect				unit_scale(double k, t_vect *v);
 t_vect				*calc_point(t_line *line, double t);
@@ -178,7 +174,6 @@ double				inter_cyl(t_cyl *cyl, t_line *l);
 double				inter_cone(t_cone *cone, t_line *l);
 void				print_cone(t_cone *cone);
 void				read_object_cone(t_object *object, int fd);
-t_plane				*calc_plane(t_vect *normal, t_vect *A);
 t_vect				*v_add(t_vect *u1, t_vect *u2);
 t_vect				*v_sub(t_vect *u1, t_vect *u2);
 double				v_mult(t_vect *u1, t_vect *u2);
@@ -190,16 +185,16 @@ double				is_shadow(t_mlx *mlx, t_line *cam, double d);
 void				read_light(t_mlx *mlx, int fd);
 void				rotate_xyz(t_vect *p, double a, int axe);
 void				rot_obj_x(t_object *obj, double angle, int axe);
-void				read_rot(t_mlx *mlx, char *line, int fd, int i);
+void				read_rot(t_mlx *mlx, char *line, int i);
 double				v_scale(t_vect *u, t_vect *v);
 t_color				mult_color(t_color color, double mult);
-double				calc_light(t_mlx *mlx, t_line *cam, t_object *obj, double t);
+double				calc_light(t_mlx *mlx, t_line *cam,
+		t_object *obj, double t);
 void				clear_im(t_mlx *mlx, unsigned int *im);
 void				read_translation(t_mlx *mlx, char *line, int fd, int i);
 void				read_color(t_color *color, int fd);
 void				jump_coment(char **line);
 void				jump_coment2(char **line);
-
-void				print_object(t_mlx *mlx);
+void				calc_ray(t_mlx *mlx, t_vect *dir, double x, double y);
 
 #endif

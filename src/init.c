@@ -25,7 +25,8 @@ t_mlx			*init(int ac, char **av)
 	if (ac < 2)
 		exit(0);
 	m = ft_memalloc(sizeof(*m));
-	m->mlx = mlx_init();
+	if (!(m->mlx = mlx_init()))
+			exit_error("init mlx");
 	m->width = 800;
 	m->height = 800;
 	m->fov = PI / 2;

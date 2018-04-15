@@ -17,6 +17,7 @@ void			read_cyl(t_cyl *cyl, int fd)
 	char	*line;
 
 	cyl->dir = read_vect(fd);
+	v_unit(cyl->dir);
 	if (is_nul(cyl->dir))
 		exit_error("vecteur directeur null");
 	cyl->pos = read_vect(fd);
@@ -34,22 +35,22 @@ void			read_object_cyl(t_object *object, int fd)
 	read_cyl(object->form, fd);
 }
 
-static double	calc_a(t_cyl *cyl, t_line *l, double k)
+static double	calc_a(t_cyl *cyl, t_line *l)
 {
 	return (l->dir->x * l->dir->x + l->dir->y * l->dir->y +
 			l->dir->z * l->dir->z -
-			k * (cyl->dir->x * cyl->dir->x * l->dir->x * l->dir->x +
-				cyl->dir->y * cyl->dir->y * l->dir->y * l->dir->y +
-				cyl->dir->z * cyl->dir->z * l->dir->z * l->dir->z +
-				2 * (
-				cyl->dir->x * cyl->dir->y * l->dir->x * l->dir->y +
-				cyl->dir->x * cyl->dir->z * l->dir->x * l->dir->z +
-				cyl->dir->y * cyl->dir->z * l->dir->y * l->dir->z)));
+			(cyl->dir->x * cyl->dir->x * l->dir->x * l->dir->x +
+			cyl->dir->y * cyl->dir->y * l->dir->y * l->dir->y +
+			cyl->dir->z * cyl->dir->z * l->dir->z * l->dir->z +
+			2 * (
+			cyl->dir->x * cyl->dir->y * l->dir->x * l->dir->y +
+			cyl->dir->x * cyl->dir->z * l->dir->x * l->dir->z +
+			cyl->dir->y * cyl->dir->z * l->dir->y * l->dir->z)));
 }
 
-static double	calc_b(t_cyl *cyl, t_line *l, double k, t_vect *d)
+static double	calc_b(t_cyl *cyl, t_line *l, t_vect *d)
 {
-	return (2 * (d->x * l->dir->x + d->y * l->dir->y + d->z * l->dir->z) - k *
+	return (2 * (d->x * l->dir->x + d->y * l->dir->y + d->z * l->dir->z) -
 		(2 * (cyl->dir->x * cyl->dir->x * l->dir->x * d->x +
 		cyl->dir->y * cyl->dir->y * l->dir->y * d->y +
 		cyl->dir->z * cyl->dir->z * l->dir->z * d->z +
@@ -61,20 +62,17 @@ static double	calc_b(t_cyl *cyl, t_line *l, double k, t_vect *d)
 double			inter_cyl(t_cyl *cyl, t_line *l)
 {
 	t_vect	*d;
-	double	k;
 	double	a;
 	double	b;
 	double	c;
 
 	d = new_vect(l->origin->x - cyl->pos->x, l->origin->y - cyl->pos->y,
 			l->origin->z - cyl->pos->z);
-	k = 1 / (cyl->dir->x * cyl->dir->x + cyl->dir->y * cyl->dir->y +
-		cyl->dir->z * cyl->dir->z);
-	a = calc_a(cyl, l, k);
-	b = calc_b(cyl, l, k, d);
-	c = d->x * d->x * (1 - k * cyl->dir->x * cyl->dir->x) +
-	d->y * d->y * (1 - k * cyl->dir->y * cyl->dir->y) +
-	d->z * d->z * (1 - k * cyl->dir->z * cyl->dir->z) - 2 * k *
+	a = calc_a(cyl, l);
+	b = calc_b(cyl, l, d);
+	c = d->x * d->x * (1 - cyl->dir->x * cyl->dir->x) +
+	d->y * d->y * (1 -  cyl->dir->y * cyl->dir->y) +
+	d->z * d->z * (1 -  cyl->dir->z * cyl->dir->z) - 2 *
 	(cyl->dir->x * cyl->dir->y * d->x * d->y +
 	cyl->dir->x * cyl->dir->z * d->x * d->z +
 	cyl->dir->y * cyl->dir->z * d->y * d->z) - cyl->r * cyl->r;

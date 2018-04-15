@@ -57,8 +57,8 @@ static t_vect	*calc_cc(t_object *obj, t_vect *pos, t_line *cam, double t)
 	tmp3 = NULL;
 	tmp = v_sub(pos, ((t_cyl*)obj->form)->pos);
 	tmp3 = v_sub(cam->origin, ((t_cyl*)obj->form)->pos);
-	tmp2 = unit_scale(v_mult(cam->dir, ((t_cyl*)obj->form)->dir) * t +
-			v_mult(((t_cyl*)obj->form)->dir, tmp3),
+	tmp2 = unit_scale(v_scale(cam->dir, ((t_cyl*)obj->form)->dir) * t +
+			v_scale(((t_cyl*)obj->form)->dir, tmp3),
 			((t_cyl*)obj->form)->dir);
 	free(tmp3);
 	if (obj->type == CONE)
@@ -108,9 +108,9 @@ double			calc_light(t_mlx *mlx, t_line *cam, t_object *obj, double t)
 	percent = is_shadow(mlx, cam, t);
 	free(pos);
 	if (percent < 10 && mlx->ombre)
-		res = percent * ft_absd(v_mult(dir_light, norm));
+		res = percent * ft_absd(v_scale(dir_light, norm));
 	else
-		res = ft_absd(v_mult(dir_light, norm));
+		res = ft_absd(v_scale(dir_light, norm));
 	if (norm && (norm != ((t_plane*)obj->form)->normal))
 		free(norm);
 	free(dir_light);

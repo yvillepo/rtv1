@@ -25,21 +25,13 @@ void		read_plane(t_plane *plane, int fd)
 	if (is_nul(plane->normal))
 		exit_error("vecteur directeur null");
 	plane->pos = read_vect(fd);
-	plane->d = -(plane->normal->x * plane->pos->x + plane->normal->y *
-			plane->pos->y + plane->normal->z * plane->pos->z);
-	plane->pos = plane->pos;
+	plane->d = -v_scale(plane->normal, plane->pos);
 }
 
 double		inter_plane(t_plane *plane, t_line *line)
 {
 	double	d;
 
-	d = line->dir->x * plane->normal->x + line->dir->y * plane->normal->y
-			+ line->dir->z * plane->normal->z;
-	if (d == 0)
-		return (-1);
-	d = (-((plane->normal->x * line->origin->x + plane->normal->y *
-					line->origin->y + plane->normal->z
-					* line->origin->z + plane->d) / d));
-	return (d);
+	d = v_scale(line->dir, plane->normal);
+	return (-(v_scale(plane->normal, line->origin) + plane->d / d));
 }

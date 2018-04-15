@@ -19,6 +19,11 @@ t_vect		*calc_point(t_line *line, double t)
 			line->origin->z + line->dir->z * t));
 }
 
+double		v_l2(t_vect *v)
+{
+	return (v->x * v->x + v->y * v->y + v->z * v->z);
+}
+
 double		v_l(t_vect *v)
 {
 	return (sqrt(v->x * v->x + v->y * v->y + v->z * v->z));

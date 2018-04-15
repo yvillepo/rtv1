@@ -33,19 +33,17 @@ void		read_sphere(t_sphere *sphere, int fd)
 
 double		inter_sphere(t_sphere *sphere, t_line *line)
 {
-	double	a;
-	double	b;
+	t_vect	deg2;
+	t_vect	*diff;
 	double	t;
-	t_vect	*v;
 
-	v = new_vect(line->origin->x - sphere->centre->x,
+	diff = new_vect(line->origin->x - sphere->centre->x,
 			line->origin->y - sphere->centre->y,
 			line->origin->z - sphere->centre->z);
-	a = line->dir->x * line->dir->x + line->dir->y * line->dir->y
-		+ line->dir->z * line->dir->z;
-	b = 2 * (line->dir->x * v->x + line->dir->y * v->y + line->dir->z * v->z);
-	t = solv_2nd(a, b, (v->x * v->x + v->y * v->y + v->z * v->z -
-			sphere->rayon * sphere->rayon));
-	free(v);
+	deg2.x = v_scale(line->dir, line->dir); 
+	deg2.y = 2 * v_scale(line->dir, diff);
+	deg2.z = v_scale(diff, diff) - sphere->rayon * sphere->rayon;
+	t = solv_2nd(deg2.x, deg2.y, deg2.z);
+	free(diff);
 	return (t);
 }

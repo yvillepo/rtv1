@@ -35,47 +35,19 @@ void			read_object_cyl(t_object *object, int fd)
 	read_cyl(object->form, fd);
 }
 
-static double	calc_a(t_cyl *cyl, t_line *l)
-{
-	return (l->dir->x * l->dir->x + l->dir->y * l->dir->y +
-			l->dir->z * l->dir->z -
-			(cyl->dir->x * cyl->dir->x * l->dir->x * l->dir->x +
-			cyl->dir->y * cyl->dir->y * l->dir->y * l->dir->y +
-			cyl->dir->z * cyl->dir->z * l->dir->z * l->dir->z +
-			2 * (
-			cyl->dir->x * cyl->dir->y * l->dir->x * l->dir->y +
-			cyl->dir->x * cyl->dir->z * l->dir->x * l->dir->z +
-			cyl->dir->y * cyl->dir->z * l->dir->y * l->dir->z)));
-}
-
-static double	calc_b(t_cyl *cyl, t_line *l, t_vect *d)
-{
-	return (2 * (d->x * l->dir->x + d->y * l->dir->y + d->z * l->dir->z) -
-		(2 * (cyl->dir->x * cyl->dir->x * l->dir->x * d->x +
-		cyl->dir->y * cyl->dir->y * l->dir->y * d->y +
-		cyl->dir->z * cyl->dir->z * l->dir->z * d->z +
-		cyl->dir->x * cyl->dir->y * (l->dir->x * d->y + l->dir->y * d->x) +
-		cyl->dir->x * cyl->dir->z * (l->dir->x * d->z + l->dir->z * d->x) +
-		cyl->dir->y * cyl->dir->z * (l->dir->y * d->z + l->dir->z * d->y))));
-}
-
 double			inter_cyl(t_cyl *cyl, t_line *l)
 {
-	t_vect	*d;
-	double	a;
-	double	b;
-	double	c;
+	t_vect	*diff;
+	t_vect	deg2;
 
-	d = new_vect(l->origin->x - cyl->pos->x, l->origin->y - cyl->pos->y,
+	diff = new_vect(l->origin->x - cyl->pos->x, l->origin->y - cyl->pos->y,
 			l->origin->z - cyl->pos->z);
-	a = calc_a(cyl, l);
-	b = calc_b(cyl, l, d);
-	c = d->x * d->x * (1 - cyl->dir->x * cyl->dir->x) +
-	d->y * d->y * (1 -  cyl->dir->y * cyl->dir->y) +
-	d->z * d->z * (1 -  cyl->dir->z * cyl->dir->z) - 2 *
-	(cyl->dir->x * cyl->dir->y * d->x * d->y +
-	cyl->dir->x * cyl->dir->z * d->x * d->z +
-	cyl->dir->y * cyl->dir->z * d->y * d->z) - cyl->r * cyl->r;
-	free(d);
-	return (solv_2nd(a, b, c));
+	deg2.x = v_scale(l->dir, l->dir) -
+		pow(v_scale(l->dir, cyl->dir), 2);
+	deg2.y = 2 * (v_scale(l->dir, diff) -
+			v_scale(l->dir, cyl->dir) * v_scale(diff, cyl->dir));
+	deg2.z = v_scale(diff, diff) - 2 * pow(v_scale(diff, cyl->dir), 2) -
+		cyl->r * cyl->r;
+	free(diff);
+	return (solv_2nd(deg2.x, deg2.y, deg2.z));
 }
